@@ -78,7 +78,6 @@ def sqrt_newton_schulz(A, numIters, dtype=None):
     sA = Y * torch.sqrt(normA).view(batchSize, 1, 1).expand_as(A)
     return sA
 
-
 # A pytorch implementation of cov, from Modar M. Alfadly
 # https://discuss.pytorch.org/t/covariance-and-gradient-support/16217/2
 def torch_cov(m, rowvar=False):
@@ -280,7 +279,7 @@ def calculate_fid_given_paths_torch(gen_imgs, path, require_grad=False, batch_si
 
     return fid_value
 
-
+# SUSPECT : Inference Image
 def get_fid(args, fid_stat, epoch, gen_net, num_img, val_batch_size, writer_dict=None, cls_idx=None):
     gen_net.eval()
     with torch.no_grad():
@@ -290,6 +289,7 @@ def get_fid(args, fid_stat, epoch, gen_net, num_img, val_batch_size, writer_dict
         eval_iter = num_img // val_batch_size
         img_list = []
         for _ in tqdm(range(eval_iter), desc='sample images'):
+            # SUSPECT : SAMPLE NOISE
             z = torch.cuda.FloatTensor(np.random.normal(0, 1, (val_batch_size, args.latent_dim)))
 
             # Generate a batch of images

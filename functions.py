@@ -81,7 +81,6 @@ class data_prefetcher():
         data_1, data_2 = self.next_data_1, self.next_data_2
         self.preload()
         return data_1, data_2
-        
 
 def train(args, gen_net: nn.Module, dis_net: nn.Module, gen_optimizer, dis_optimizer, gen_avg_param, train_loader,
           epoch, writer_dict, fixed_z, schedulers=None):
@@ -92,7 +91,6 @@ def train(args, gen_net: nn.Module, dis_net: nn.Module, gen_optimizer, dis_optim
     gen_net = gen_net.train()
     dis_net = dis_net.train()
     dis_net.module.cur_stage = gen_net.module.cur_stage
-    
 
     for iter_idx, (imgs, _) in enumerate(tqdm(train_loader)):
         global_steps = writer_dict['train_global_steps']
@@ -247,9 +245,7 @@ def validate(args, fixed_z, fid_stat, epoch, gen_net: nn.Module, writer_dict, cl
 
     # writer.add_image('sampled_images', img_grid, global_steps)
     writer.add_scalar('FID_score', fid_score, global_steps)
-
     writer_dict['valid_global_steps'] = global_steps + 1
-
     return fid_score
 
 

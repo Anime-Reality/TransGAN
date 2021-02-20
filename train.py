@@ -157,12 +157,16 @@ def main():
     epoch = 300
     backup_param = copy_params(gen_net)
     load_params(gen_net, gen_avg_param)
-    fid_score = validate(args, fixed_z, fid_stat, epoch, gen_net, writer_dict, )
-    logger.info(f'FID score: {fid_score} || @ epoch {epoch}.')
-    load_params(gen_net, backup_param)
 
+    # gen_optimizer, dis_optimizer
+    # gen_avg_param
 
+    train(args, gen_net, dis_net, gen_optimizer, dis_optimizer, gen_avg_param, train_loader,
+             epoch, writer_dict, fixed_z )
 
+    # fid_score = validate(args, fixed_z, fid_stat, epoch, gen_net, writer_dict )
+    # logger.info(f'FID score: {fid_score} || @ epoch {epoch}.')
+    # load_params(gen_net, backup_param)
 
 
 if __name__ == '__main__':

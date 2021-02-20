@@ -1,0 +1,11 @@
+version: "3.2"
+
+services:
+  jupyter:
+    build: .
+    container_name: msg-extractor
+    volumes:
+      - ./:/msg_app
+    restart: unless-stopped
+    ports:
+      - "8888:8888"
